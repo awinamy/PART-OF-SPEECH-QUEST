@@ -1,115 +1,2663 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>G-QUEST Multiplayer • 6 Parts of Speech</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>G-QUEST | 6 Parts of Speech Quest</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:radial-gradient(circle at 15% 10%,#fff 0 12%,transparent 28%),linear-gradient(135deg,#eef2ff,#fff1f8 48%,#ecfeff);color:#182033;min-height:100vh}#app{max-width:1250px;margin:auto;padding:20px}header,.card{background:rgba(255,255,255,.94);border:1px solid #ffffffaa;border-radius:26px;padding:20px;box-shadow:0 14px 40px #33415520}header{display:flex;justify-content:space-between;align-items:center;gap:16px;position:relative;overflow:hidden}header:after{content:"✨  🎯  ⭐  🎲  ✨";position:absolute;right:18px;bottom:-8px;font-size:30px;opacity:.09;letter-spacing:8px}h1{margin:0;font-size:30px;letter-spacing:-.6px}.sub{color:#667085;margin-top:6px;font-weight:600}.stats{display:flex;gap:8px;flex-wrap:wrap;z-index:1}.pill{background:#f8fafc;border:1px solid #e5e7eb;border-radius:15px;padding:10px 13px;font-weight:800}main{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px;margin-top:18px}.card h2{margin-top:0}.board-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.legend{display:flex;gap:6px;flex-wrap:wrap}.legend span{font-size:11px;font-weight:800;padding:5px 8px;border-radius:999px;border:1px solid #fff;box-shadow:0 2px 7px #00000010}.legend .ln{background:#dbeafe}.legend .lp{background:#dcfce7}.legend .lv{background:#fef3c7}.legend .la{background:#ffedd5}.legend .lad{background:#f3e8ff}.legend .lpr{background:#ffe4e6}.legend .lb{background:#e0e7ff}
-#board{display:grid;grid-template-columns:repeat(10,1fr);gap:9px;margin-top:15px;padding:12px;border-radius:22px;background:linear-gradient(145deg,#f8fafc,#eef2ff);border:2px solid #e2e8f0;box-shadow:inset 0 2px 10px #00000008}.cell{min-height:82px;border-radius:18px;padding:8px;font-weight:900;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;border:3px solid #ffffff;transition:transform .2s,box-shadow .2s,filter .2s;overflow:visible;box-shadow:0 5px 12px #47556918}.cell:before{content:"";position:absolute;inset:3px;border-radius:13px;border:1px dashed #ffffff99;pointer-events:none}.cell small{position:absolute;top:6px;left:8px;opacity:.65;font-size:11px;background:#ffffffaa;border-radius:7px;padding:2px 5px}.cell span:not(.marker){font-size:12px;line-height:1.15;text-transform:uppercase;margin-top:15px}.cell:hover{transform:translateY(-3px);box-shadow:0 9px 18px #47556925}.start{background:linear-gradient(135deg,#a7f3d0,#34d399)}.finish{background:linear-gradient(135deg,#fde68a,#f59e0b);animation:finishGlow 1.8s infinite alternate}.noun{background:linear-gradient(135deg,#dbeafe,#93c5fd)}.pronoun{background:linear-gradient(135deg,#dcfce7,#86efac)}.verb{background:linear-gradient(135deg,#fef3c7,#fcd34d)}.adjective{background:linear-gradient(135deg,#ffedd5,#fdba74)}.adverb{background:linear-gradient(135deg,#f3e8ff,#d8b4fe)}.preposition{background:linear-gradient(135deg,#ffe4e6,#fda4af)}.special{background:linear-gradient(135deg,#e0e7ff,#a5b4fc);animation:bonusPulse 1.6s infinite alternate}.current{outline:4px solid #111827;transform:scale(1.04);z-index:3;box-shadow:0 0 0 7px #ffffffaa,0 12px 25px #11182730}.marker{position:absolute;bottom:4px;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;border:3px solid white;box-shadow:0 4px 10px #0006;animation:markerPop .35s ease-out;z-index:5}.m0{background:#2563eb;left:4px}.m1{background:#db2777;right:4px}.m2{background:#16a34a;left:4px;bottom:38px}.m3{background:#9333ea;right:4px;bottom:38px}@keyframes markerPop{0%{transform:scale(.2) rotate(-15deg)}70%{transform:scale(1.2) rotate(8deg)}100%{transform:scale(1) rotate(0)}}@keyframes bonusPulse{to{box-shadow:0 0 0 7px #818cf833,0 0 20px #6366f155}}@keyframes finishGlow{to{box-shadow:0 0 0 6px #f59e0b22,0 0 22px #f59e0b66}}
-.dice-stage{display:flex;align-items:center;gap:16px;margin:18px 0 10px;padding:13px 15px;border-radius:18px;background:linear-gradient(90deg,#f8fafc,#eef2ff);border:1px solid #e2e8f0}.dice-face{font-size:66px;width:82px;text-align:center;display:inline-block;filter:drop-shadow(0 5px 5px #0002)}.rolling{animation:shake .11s infinite}@keyframes shake{0%{transform:rotate(-14deg) scale(1)}50%{transform:rotate(14deg) scale(1.13)}100%{transform:rotate(-14deg) scale(1)}}.dice-result{font-size:18px;font-weight:900}.dice{font-size:17px;width:100%;background:linear-gradient(135deg,#4f46e5,#7c3aed);box-shadow:0 8px 18px #4f46e544}.dice:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.04)}button{border:0;border-radius:13px;padding:11px 16px;font-weight:800;cursor:pointer;background:#111827;color:white;margin:4px;transition:.18s}button:disabled{opacity:.45;cursor:not-allowed}input,select{width:100%;padding:12px;border:1px solid #d0d5dd;border-radius:12px;margin:5px 0;font-size:16px;background:white}.question{font-size:20px;font-weight:800;margin:12px 0}.category{font-weight:900;color:#6941c6}.answers{display:grid;gap:8px}.answers button{text-align:left;background:#f2f4f7;color:#172033}.answers button.correct{background:#bbf7d0}.answers button.wrong{background:#fecaca}.feedback{padding:12px;border-radius:12px;margin-top:10px}.hidden{display:none}.player-card{padding:12px;border-radius:16px;margin:8px 0;border:2px solid #eee;background:#fafafa}.active-card{border-color:#111827;background:linear-gradient(135deg,#f8fafc,#eef2ff);box-shadow:0 5px 14px #00000010}.logitem{font-size:13px;padding:7px 0;border-bottom:1px solid #eee}.overlay{position:fixed;inset:0;background:#111827aa;display:flex;align-items:center;justify-content:center;padding:20px;z-index:20;backdrop-filter:blur(5px)}.modal{background:white;border-radius:28px;padding:26px;max-width:480px;width:100%;box-shadow:0 25px 70px #0005}.names{display:grid;gap:6px}.mini{font-size:13px;color:#667085}.route-note{font-size:12px;color:#667085;margin:7px 2px 0;font-weight:700}@media(max-width:1000px){#board{grid-template-columns:repeat(8,1fr)}}@media(max-width:800px){main{grid-template-columns:1fr}#board{grid-template-columns:repeat(5,1fr)}header{flex-direction:column;align-items:flex-start}}@media(max-width:520px){#app{padding:10px}#board{grid-template-columns:repeat(4,1fr);gap:6px;padding:8px}.cell{min-height:70px;border-radius:14px}.cell span:not(.marker){font-size:10px}.marker{width:29px;height:29px;font-size:15px}.m2,.m3{bottom:32px}.dice-face{font-size:55px}}
-</style></head><body><div id="app">
-<header><div><h1>🎮 G-QUEST MULTIPLAYER</h1><div class="sub">6 Parts of Speech • Team Play • 50 Boxes</div></div><div class="stats"><div class="pill">🎯 Turn: <span id="turnName">—</span></div><div class="pill">🏆 <span id="turnXP">0</span> XP</div><div class="pill">📍 Box <span id="turnPos">1</span>/50</div></div></header>
-<main><section class="card"><div class="board-head"><h2>🗺️ G-QUEST ADVENTURE BOARD</h2><div class="legend"><span class="ln">🔵 Noun</span><span class="lp">🟢 Pronoun</span><span class="lv">🟡 Verb</span><span class="la">🟠 Adjective</span><span class="lad">🟣 Adverb</span><span class="lpr">🔴 Preposition</span><span class="lb">⭐ BONUS</span></div></div><div class="route-note">🚀 START → 🧠 Grammar Challenges → ⭐ BONUS → 🏁 FINISH</div><div id="board"></div><div class="dice-stage"><div id="diceFace" class="dice-face">⚀</div><div id="diceResult" class="dice-result">Waiting for players…</div></div><button class="dice" id="rollBtn" onclick="rollDice()">🎲 ROLL DICE</button><div id="questionBox" class="hidden"><div class="category" id="cat"></div><div class="question" id="q"></div><div class="answers" id="answers"></div><div id="feedback" class="feedback hidden"></div></div></section>
-<aside class="card"><h2>👥 Players</h2><div id="players"></div><hr><h3>📊 Current Player</h3><div id="mastery"></div><hr><h3>📜 Recent Moves</h3><div id="log"></div></aside></main></div>
-<div class="overlay" id="startOverlay"><div class="modal"><h2>🚀 G-QUEST MULTIPLAYER</h2><p>Choose <b>2–4 players</b>. Each player takes turns rolling the dice and answering grammar challenges.</p><label><b>Number of players</b></label><select id="playerCount" onchange="buildNameInputs()"><option value="2">2 Players</option><option value="3">3 Players</option><option value="4">4 Players</option></select><div id="nameInputs" class="names"></div><button onclick="begin()">🚀 START MULTIPLAYER</button></div></div>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:
+radial-gradient(circle at 10% 10%,#fff 0 12%,transparent 30%),
+linear-gradient(135deg,#eef2ff,#fff1f8,#ecfeff);
+color:#182033;
+min-height:100vh
+}
+
+#app{
+max-width:1250px;
+margin:auto;
+padding:18px
+}
+
+header,.card{
+background:rgba(255,255,255,.96);
+border-radius:26px;
+padding:20px;
+box-shadow:0 14px 40px #33415520;
+border:1px solid #fff
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px
+}
+
+h1{
+margin:0;
+font-size:30px
+}
+
+.sub{
+margin-top:5px;
+color:#667085;
+font-weight:bold
+}
+
+.stats{
+display:flex;
+gap:8px;
+flex-wrap:wrap
+}
+
+.pill{
+background:#f8fafc;
+padding:10px 13px;
+border-radius:14px;
+font-weight:bold;
+border:1px solid #e5e7eb
+}
+
+main{
+display:grid;
+grid-template-columns:minmax(0,1fr) 330px;
+gap:18px;
+margin-top:18px
+}
+
+.board-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+flex-wrap:wrap
+}
+
+.legend{
+display:flex;
+gap:5px;
+flex-wrap:wrap
+}
+
+.legend span{
+padding:5px 8px;
+border-radius:999px;
+font-size:11px;
+font-weight:bold
+}
+
+.ln{background:#dbeafe}
+.lp{background:#dcfce7}
+.lv{background:#fef3c7}
+.la{background:#ffedd5}
+.lad{background:#f3e8ff}
+.lpr{background:#ffe4e6}
+.lb{background:#e0e7ff}
+
+.route{
+font-size:12px;
+font-weight:bold;
+color:#667085;
+margin:7px 0
+}
+
+#board{
+display:grid;
+grid-template-columns:repeat(10,1fr);
+gap:8px;
+padding:12px;
+background:linear-gradient(145deg,#f8fafc,#eef2ff);
+border:2px solid #e2e8f0;
+border-radius:22px
+}
+
+.cell{
+min-height:82px;
+border-radius:17px;
+border:3px solid white;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+font-weight:900;
+position:relative;
+box-shadow:0 5px 12px #47556920;
+transition:.2s
+}
+
+.cell:hover{
+transform:translateY(-3px)
+}
+
+.cell small{
+position:absolute;
+top:5px;
+left:6px;
+background:#ffffffaa;
+padding:2px 5px;
+border-radius:6px;
+font-size:10px
+}
+
+.start{
+background:linear-gradient(135deg,#a7f3d0,#34d399)
+}
+
+.finish{
+background:linear-gradient(135deg,#fde68a,#f59e0b);
+animation:finish 1.5s infinite alternate
+}
+
+.noun{
+background:linear-gradient(135deg,#dbeafe,#93c5fd)
+}
+
+.pronoun{
+background:linear-gradient(135deg,#dcfce7,#86efac)
+}
+
+.verb{
+background:linear-gradient(135deg,#fef3c7,#fcd34d)
+}
+
+.adjective{
+background:linear-gradient(135deg,#ffedd5,#fdba74)
+}
+
+.adverb{
+background:linear-gradient(135deg,#f3e8ff,#d8b4fe)
+}
+
+.preposition{
+background:linear-gradient(135deg,#ffe4e6,#fda4af)
+}
+
+.bonus{
+background:linear-gradient(135deg,#e0e7ff,#a5b4fc);
+animation:bonus 1.4s infinite alternate
+}
+
+.current{
+outline:4px solid #111827;
+transform:scale(1.04);
+z-index:3
+}
+
+@keyframes bonus{
+to{
+box-shadow:0 0 20px #6366f166
+}
+}
+
+@keyframes finish{
+to{
+box-shadow:0 0 25px #f59e0b77
+}
+}
+
+.marker{
+position:absolute;
+bottom:4px;
+width:34px;
+height:34px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:20px;
+background:white;
+border:3px solid white;
+box-shadow:0 4px 10px #0005;
+z-index:5;
+animation:pop .35s ease-out
+}
+
+.m0{left:3px}
+.m1{right:3px}
+.m2{left:3px;bottom:38px}
+.m3{right:3px;bottom:38px}
+
+@keyframes pop{
+0%{transform:scale(.2)}
+70%{transform:scale(1.2)}
+100%{transform:scale(1)}
+}
+
+.dice-stage{
+display:flex;
+align-items:center;
+gap:15px;
+padding:13px;
+margin-top:15px;
+background:#f8fafc;
+border-radius:18px
+}
+
+.dice-face{
+font-size:65px;
+width:80px;
+text-align:center
+}
+
+.rolling{
+animation:roll .1s infinite
+}
+
+@keyframes roll{
+0%{transform:rotate(-15deg) scale(1)}
+50%{transform:rotate(15deg) scale(1.15)}
+100%{transform:rotate(-15deg) scale(1)}
+}
+
+.dice-result{
+font-weight:900;
+font-size:17px
+}
+
+button{
+border:0;
+border-radius:13px;
+padding:11px 15px;
+margin:4px;
+font-weight:bold;
+cursor:pointer;
+background:#111827;
+color:white
+}
+
+button:hover{
+transform:translateY(-1px)
+}
+
+button:disabled{
+opacity:.45;
+cursor:not-allowed
+}
+
+.dice{
+width:100%;
+font-size:17px;
+background:linear-gradient(135deg,#4f46e5,#7c3aed)
+}
+
+input,select{
+width:100%;
+padding:12px;
+border-radius:12px;
+border:1px solid #d0d5dd;
+margin:5px 0;
+font-size:16px
+}
+
+.question{
+font-size:20px;
+font-weight:bold;
+margin:12px 0
+}
+
+.category{
+font-weight:bold;
+color:#6941c6
+}
+
+.answers{
+display:grid;
+gap:8px
+}
+
+.answers button{
+text-align:left;
+background:#f2f4f7;
+color:#182033
+}
+
+.answers button.correct{
+background:#bbf7d0
+}
+
+.answers button.wrong{
+background:#fecaca
+}
+
+.feedback{
+padding:12px;
+border-radius:12px;
+margin-top:10px
+}
+
+.hidden{
+display:none
+}
+
+.player-card{
+padding:12px;
+border-radius:16px;
+margin:8px 0;
+background:#fafafa;
+border:2px solid #eee
+}
+
+.active-card{
+border-color:#6366f1;
+background:#eef2ff
+}
+
+.winner{
+border-color:#f59e0b;
+background:#fffbeb
+}
+
+.analytics{
+padding:10px;
+background:#f8fafc;
+border-radius:14px;
+margin-top:8px
+}
+
+.barrow{
+display:grid;
+grid-template-columns:90px 1fr 40px;
+gap:7px;
+align-items:center;
+font-size:11px;
+font-weight:bold;
+margin:7px 0
+}
+
+.bar{
+height:9px;
+background:#e5e7eb;
+border-radius:99px;
+overflow:hidden
+}
+
+.bar i{
+display:block;
+height:100%;
+background:linear-gradient(90deg,#6366f1,#a855f7);
+border-radius:99px
+}
+
+.badge{
+display:inline-block;
+background:#fff7ed;
+border:1px solid #fed7aa;
+padding:5px 8px;
+border-radius:999px;
+font-size:11px;
+font-weight:bold;
+margin:3px
+}
+
+.dashboard-btn{
+width:100%;
+background:linear-gradient(135deg,#0f766e,#0891b2)
+}
+
+.overlay{
+position:fixed;
+inset:0;
+background:#111827aa;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+z-index:50
+}
+
+.modal{
+background:white;
+padding:26px;
+border-radius:26px;
+max-width:500px;
+width:100%;
+box-shadow:0 25px 70px #0005
+}
+
+.avatar-select{
+display:grid;
+grid-template-columns:repeat(6,1fr);
+gap:5px
+}
+
+.avatar-option{
+font-size:22px;
+padding:8px;
+background:#f8fafc;
+color:#111827;
+border:2px solid #e5e7eb
+}
+
+.avatar-option.selected{
+border-color:#6366f1;
+background:#eef2ff
+}
+
+.logitem{
+font-size:12px;
+padding:7px 0;
+border-bottom:1px solid #eee
+}
+
+.summary{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:7px;
+margin:8px 0
+}
+
+.summary div{
+background:#f8fafc;
+padding:10px;
+border-radius:12px;
+text-align:center;
+font-size:11px
+}
+
+.summary b{
+font-size:18px;
+display:block
+}
+
+@media(max-width:850px){
+main{
+grid-template-columns:1fr
+}
+
+#board{
+grid-template-columns:repeat(5,1fr)
+}
+}
+
+@media(max-width:520px){
+#app{
+padding:9px
+}
+
+#board{
+grid-template-columns:repeat(5,1fr);
+gap:5px;
+padding:7px
+}
+
+.cell{
+min-height:68px;
+font-size:10px
+}
+
+.marker{
+width:27px;
+height:27px;
+font-size:16px
+}
+
+.m2,.m3{
+bottom:31px
+}
+
+.dice-face{
+font-size:52px
+}
+
+header{
+flex-direction:column;
+align-items:flex-start
+}
+}
+</style>
+</head>
+
+<body>
+
+<div id="app">
+
+<header>
+
+<div>
+<h1>🎮 G-QUEST</h1>
+<div class="sub">
+6 Parts of Speech Quest • Multiplayer Educational Game
+</div>
+</div>
+
+<div class="stats">
+
+<div class="pill">
+🎯 <span id="turnName">—</span>
+</div>
+
+<div class="pill">
+⭐ <span id="turnXP">0</span> XP
+</div>
+
+<div class="pill">
+📍 <span id="turnPos">1</span>/50
+</div>
+
+</div>
+
+</header>
+
+
+<main>
+
+<section class="card">
+
+<div class="board-head">
+
+<h2>🗺️ ADVENTURE BOARD</h2>
+
+<div class="legend">
+
+<span class="ln">🔵 Noun</span>
+<span class="lp">🟢 Pronoun</span>
+<span class="lv">🟡 Verb</span>
+<span class="la">🟠 Adjective</span>
+<span class="lad">🟣 Adverb</span>
+<span class="lpr">🔴 Preposition</span>
+<span class="lb">⭐ Bonus</span>
+
+</div>
+
+</div>
+
+<div class="route">
+🚀 START → 🧠 Grammar Challenge → ⭐ BONUS → 🏆 FINISH
+</div>
+
+<div id="board"></div>
+
+
+<div class="dice-stage">
+
+<div id="diceFace" class="dice-face">
+⚀
+</div>
+
+<div id="diceResult" class="dice-result">
+Waiting for players...
+</div>
+
+</div>
+
+<button
+id="rollBtn"
+class="dice"
+onclick="rollDice()"
+disabled
+>
+🎲 ROLL DICE
+</button>
+
+
+<div id="questionBox" class="hidden">
+
+<div id="cat" class="category"></div>
+
+<div id="q" class="question"></div>
+
+<div id="answers" class="answers"></div>
+
+<div id="feedback" class="feedback hidden"></div>
+
+</div>
+
+</section>
+
+
+<aside class="card">
+
+<h2>👥 PLAYERS</h2>
+
+<div id="players"></div>
+
+<hr>
+
+<h3>📊 MASTERY</h3>
+
+<div id="mastery"></div>
+
+<h3>🏅 ACHIEVEMENTS</h3>
+
+<div id="badges"></div>
+
+<button
+class="dashboard-btn"
+onclick="showDashboard()"
+>
+📈 TEACHER DASHBOARD
+</button>
+
+<hr>
+
+<h3>📜 GAME LOG</h3>
+
+<div id="log"></div>
+
+</aside>
+
+</main>
+
+</div>
+
+
+<div class="overlay" id="startOverlay">
+
+<div class="modal">
+
+<h2>🚀 START G-QUEST</h2>
+
+<p>
+Play with <b>2–4 players</b>.
+Each player rolls the dice and answers grammar challenges.
+</p>
+
+<label>
+<b>Number of Players</b>
+</label>
+
+<select
+id="playerCount"
+onchange="buildNameInputs()"
+>
+
+<option value="2">2 Players</option>
+<option value="3">3 Players</option>
+<option value="4">4 Players</option>
+
+</select>
+
+<div id="nameInputs"></div>
+
+<button onclick="begin()">
+🚀 START GAME
+</button>
+
+</div>
+
+</div>
+
+
 <script>
+
+/* =========================
+   CATEGORIES
+========================= */
+
 const categories=[
- {key:"noun",name:"Noun",emoji:"🔵"},
- {key:"pronoun",name:"Pronoun",emoji:"🟢"},
- {key:"verb",name:"Verb",emoji:"🟡"},
- {key:"adjective",name:"Adjective",emoji:"🟠"},
- {key:"adverb",name:"Adverb",emoji:"🟣"},
- {key:"preposition",name:"Preposition",emoji:"🔴"}
+
+{
+key:"noun",
+name:"Noun",
+emoji:"🔵"
+},
+
+{
+key:"pronoun",
+name:"Pronoun",
+emoji:"🟢"
+},
+
+{
+key:"verb",
+name:"Verb",
+emoji:"🟡"
+},
+
+{
+key:"adjective",
+name:"Adjective",
+emoji:"🟠"
+},
+
+{
+key:"adverb",
+name:"Adverb",
+emoji:"🟣"
+},
+
+{
+key:"preposition",
+name:"Preposition",
+emoji:"🔴"
+}
+
 ];
+
+
+/* =========================
+   QUESTIONS
+========================= */
+
 const questions=[
-{c:"noun",q:"The teacher entered the classroom. Which word is a noun?",a:["teacher","entered","the","quickly"],x:0,e:"Teacher names a person, so it is a noun."},
-{c:"noun",q:"Which word is a noun?",a:["beautiful","school","run","they"],x:1,e:"School names a place."},
-{c:"noun",q:"The children played football in the park. Which is a noun?",a:["played","children","in","the"],x:1,e:"Children names people."},
-{c:"noun",q:"Choose the noun: 'My brother has a bicycle.'",a:["has","my","brother","a"],x:2,e:"Brother names a person."},
-{c:"noun",q:"Which word names a thing?",a:["happily","pencil","write","she"],x:1,e:"Pencil names a thing."},
-{c:"noun",q:"Which is the noun in 'Kuala Lumpur is busy'?",a:["is","busy","Kuala Lumpur","the"],x:2,e:"Kuala Lumpur is the name of a place."},
-{c:"noun",q:"Which word is NOT a noun?",a:["garden","student","quickly","computer"],x:2,e:"Quickly is an adverb."},
-{c:"noun",q:"Which word is a noun?",a:["friendship","friendly","quickly","smile"],x:0,e:"Friendship names an idea or relationship."},
-{c:"noun",q:"The cat slept on the sofa. Which word is a noun?",a:["slept","on","cat","the"],x:2,e:"Cat names an animal."},
-{c:"noun",q:"Which noun fits: 'I bought a new ___.'",a:["beautiful","bag","carefully","run"],x:1,e:"Bag is a thing."},
 
-{c:"pronoun",q:"___ am going to school.",a:["I","Me","My","Mine"],x:0,e:"I is the subject pronoun used for the speaker."},
-{c:"pronoun",q:"Ali is tired because ___ studied late.",a:["he","him","his","himself"],x:0,e:"He replaces the noun Ali."},
-{c:"pronoun",q:"Sarah and I are friends. ___ play badminton.",a:["We","Us","Our","Ours"],x:0,e:"We replaces Sarah and I."},
-{c:"pronoun",q:"The teacher called Amir. She spoke to ___.",a:["he","his","him","they"],x:2,e:"Him is the object pronoun."},
-{c:"pronoun",q:"This book belongs to me. It is ___.",a:["my","mine","I","me"],x:1,e:"Mine shows possession."},
-{c:"pronoun",q:"Which is a pronoun?",a:["beautiful","they","school","running"],x:1,e:"They is a pronoun."},
-{c:"pronoun",q:"The girls finished the project by ___.",a:["themselves","their","them","they"],x:0,e:"Themselves is the reflexive pronoun."},
-{c:"pronoun",q:"___ are my favourite shoes.",a:["Those","Them","They","Their"],x:0,e:"Those points to specific things."},
-{c:"pronoun",q:"Mr Lee gave ___ a prize.",a:["we","us","our","ours"],x:1,e:"Us is the object pronoun after gave."},
-{c:"pronoun",q:"Which word can replace 'the students'?",a:["it","he","they","she"],x:2,e:"They replaces plural people."},
+{
+c:"noun",
+q:"Which word is a noun? The teacher entered the classroom.",
+a:["teacher","entered","quickly","the"],
+x:0,
+e:"Teacher names a person."
+},
 
-{c:"verb",q:"The boys ___ football every Saturday.",a:["plays","play","playing","played"],x:1,e:"Boys is plural, so use play for a routine."},
-{c:"verb",q:"She ___ a book now.",a:["read","reads","is reading","reading"],x:2,e:"Now indicates present continuous: is reading."},
-{c:"verb",q:"Which word is the verb? 'The baby smiled happily.'",a:["baby","smiled","happily","the"],x:1,e:"Smiled shows the action."},
-{c:"verb",q:"We ___ to the museum yesterday.",a:["go","goes","went","going"],x:2,e:"Yesterday requires the past form went."},
-{c:"verb",q:"They ___ finished their homework.",a:["has","have","having","had been"],x:1,e:"They takes have."},
-{c:"verb",q:"Choose the verb: 'The birds fly over the trees.'",a:["birds","over","fly","trees"],x:2,e:"Fly shows the action."},
-{c:"verb",q:"He ___ very tired last night.",a:["is","are","was","be"],x:2,e:"He takes was in the past."},
-{c:"verb",q:"Which is a verb?",a:["happiness","beautiful","dance","carefully"],x:2,e:"Dance can show an action."},
-{c:"verb",q:"My mother ___ dinner every evening.",a:["cook","cooks","cooking","cooked"],x:1,e:"Mother is singular, so use cooks."},
-{c:"verb",q:"The students ___ English at the moment.",a:["study","studied","are studying","studies"],x:2,e:"At the moment indicates present continuous."},
+{
+c:"noun",
+q:"Which word is a noun?",
+a:["beautiful","school","quickly","run"],
+x:1,
+e:"School names a place."
+},
 
-{c:"adjective",q:"The girl wore a ___ dress.",a:["beautiful","beautifully","beauty","beautify"],x:0,e:"Beautiful describes the noun dress."},
-{c:"adjective",q:"Which word is an adjective? 'It was a cold morning.'",a:["was","cold","morning","it"],x:1,e:"Cold describes morning."},
-{c:"adjective",q:"He lives in a ___ house.",a:["comfortably","comfort","comfortable","comforted"],x:2,e:"Comfortable describes house."},
-{c:"adjective",q:"The elephant is very ___.",a:["large","largely","largeness","enlarge"],x:0,e:"Large describes the elephant."},
-{c:"adjective",q:"Which word describes the noun 'car'?",a:["quickly","red","drive","they"],x:1,e:"Red describes the car."},
-{c:"adjective",q:"She is a ___ student.",a:["carefully","careful","care","caringly"],x:1,e:"Careful describes student."},
-{c:"adjective",q:"We saw a ___ movie.",a:["exciting","excitedly","excitement","excite"],x:0,e:"Exciting describes movie."},
-{c:"adjective",q:"The soup is too ___.",a:["hot","hotly","heat","heating"],x:0,e:"Hot describes the soup."},
-{c:"adjective",q:"Which is an adjective?",a:["slowly","slow","slowness","slowlyness"],x:1,e:"Slow describes a noun."},
-{c:"adjective",q:"The test was ___.",a:["difficulty","difficult","difficultly","difficultness"],x:1,e:"Difficult describes the test."},
+{
+c:"noun",
+q:"The children played football. Which word is a noun?",
+a:["played","children","the","quickly"],
+x:1,
+e:"Children names people."
+},
 
-{c:"adverb",q:"She sings ___.",a:["beautiful","beauty","beautifully","beautify"],x:2,e:"Beautifully describes how she sings."},
-{c:"adverb",q:"He ran ___.",a:["quick","quickly","quicker","quickness"],x:1,e:"Quickly tells how he ran."},
-{c:"adverb",q:"Which word is an adverb? 'They arrived early.'",a:["they","arrived","early","the"],x:2,e:"Early tells when they arrived."},
-{c:"adverb",q:"The baby slept ___.",a:["peaceful","peacefully","peace","peaceless"],x:1,e:"Peacefully describes how the baby slept."},
-{c:"adverb",q:"She answered the question ___.",a:["correct","correctly","correction","correctness"],x:1,e:"Correctly tells how she answered."},
-{c:"adverb",q:"Which word tells how he spoke?",a:["He","spoke","softly","voice"],x:2,e:"Softly tells how he spoke."},
-{c:"adverb",q:"We will meet ___.",a:["tomorrow","tomorrow's","morrow","tomorrows"],x:0,e:"Tomorrow tells when."},
-{c:"adverb",q:"The students worked ___.",a:["hard","hardness","hardly","harder"],x:0,e:"Hard tells how they worked."},
-{c:"adverb",q:"Which is an adverb?",a:["happy","happily","happiness","happier"],x:1,e:"Happily modifies an action."},
-{c:"adverb",q:"The dog barked ___.",a:["loud","loudly","loudness","louder"],x:1,e:"Loudly tells how the dog barked."},
+{
+c:"noun",
+q:"My brother has a bicycle. Which is a noun?",
+a:["has","my","brother","a"],
+x:2,
+e:"Brother names a person."
+},
 
-{c:"preposition",q:"The book is ___ the table.",a:["on","quickly","happy","they"],x:0,e:"On shows the position of the book."},
-{c:"preposition",q:"The cat is hiding ___ the bed.",a:["under","beautiful","runs","she"],x:0,e:"Under shows location."},
-{c:"preposition",q:"We arrived ___ school at 7 a.m.",a:["at","happy","quickly","they"],x:0,e:"At is used for a specific place/time."},
-{c:"preposition",q:"The ball is ___ the box.",a:["inside","beautifully","run","he"],x:0,e:"Inside shows location."},
-{c:"preposition",q:"She walked ___ the bridge.",a:["across","careful","quickly","they"],x:0,e:"Across shows movement from one side to another."},
-{c:"preposition",q:"The picture is ___ the wall.",a:["on","softly","beautiful","run"],x:0,e:"On shows position on a surface."},
-{c:"preposition",q:"He sat ___ me.",a:["beside","happy","quick","they"],x:0,e:"Beside means next to."},
-{c:"preposition",q:"The school is ___ the hospital and the bank.",a:["between","beautifully","run","she"],x:0,e:"Between is used for two places."},
-{c:"preposition",q:"They travelled ___ Sabah last year.",a:["around","happy","quickly","they"],x:0,e:"Around can show movement within an area."},
-{c:"preposition",q:"The children ran ___ the classroom.",a:["into","beautiful","quickly","they"],x:0,e:"Into shows movement to the inside."}
+{
+c:"noun",
+q:"Which word names a thing?",
+a:["happily","pencil","write","she"],
+x:1,
+e:"Pencil names a thing."
+},
+
+{
+c:"noun",
+q:"Kuala Lumpur is busy. Which is the noun?",
+a:["is","busy","Kuala Lumpur","the"],
+x:2,
+e:"Kuala Lumpur names a place."
+},
+
+{
+c:"noun",
+q:"Which word is NOT a noun?",
+a:["garden","student","quickly","computer"],
+x:2,
+e:"Quickly is an adverb."
+},
+
+{
+c:"noun",
+q:"Which word is a noun?",
+a:["friendship","friendly","quickly","run"],
+x:0,
+e:"Friendship names an idea."
+},
+
+{
+c:"noun",
+q:"The cat slept on the sofa. Which word is a noun?",
+a:["slept","on","cat","the"],
+x:2,
+e:"Cat names an animal."
+},
+
+{
+c:"noun",
+q:"Which word is a noun?",
+a:["happiness","happy","happily","happier"],
+x:0,
+e:"Happiness names a feeling."
+},
+
+
+{
+c:"pronoun",
+q:"Which word is a pronoun?",
+a:["Ali","he","school","quickly"],
+x:1,
+e:"He replaces a person's name."
+},
+
+{
+c:"pronoun",
+q:"Sarah is my friend. ___ is kind.",
+a:["She","Her","Hers","They"],
+x:0,
+e:"She replaces Sarah."
+},
+
+{
+c:"pronoun",
+q:"Which pronoun refers to a group?",
+a:["he","she","they","it"],
+x:2,
+e:"They refers to more than one person."
+},
+
+{
+c:"pronoun",
+q:"This book belongs to me. It is ___.",
+a:["my","mine","I","me"],
+x:1,
+e:"Mine shows possession."
+},
+
+{
+c:"pronoun",
+q:"Which is a pronoun?",
+a:["beautiful","we","school","running"],
+x:1,
+e:"We is a pronoun."
+},
+
+{
+c:"pronoun",
+q:"John and I went home. ___ were tired.",
+a:["They","We","He","It"],
+x:1,
+e:"We refers to John and I."
+},
+
+{
+c:"pronoun",
+q:"The dog is hungry. ___ needs food.",
+a:["He","She","It","They"],
+x:2,
+e:"It can refer to an animal."
+},
+
+{
+c:"pronoun",
+q:"Which pronoun refers to one female?",
+a:["He","She","They","We"],
+x:1,
+e:"She refers to one female."
+},
+
+{
+c:"pronoun",
+q:"Please give the book to ___.",
+a:["I","me","my","mine"],
+x:1,
+e:"Me is an object pronoun."
+},
+
+{
+c:"pronoun",
+q:"Which word is NOT a pronoun?",
+a:["they","we","beautiful","he"],
+x:2,
+e:"Beautiful is an adjective."
+},
+
+
+{
+c:"verb",
+q:"Which word is a verb?",
+a:["run","beautiful","school","quickly"],
+x:0,
+e:"Run shows an action."
+},
+
+{
+c:"verb",
+q:"She ___ to school every day.",
+a:["walks","beautiful","school","quickly"],
+x:0,
+e:"Walks is an action."
+},
+
+{
+c:"verb",
+q:"Which word shows an action?",
+a:["happy","jump","blue","school"],
+x:1,
+e:"Jump shows an action."
+},
+
+{
+c:"verb",
+q:"They ___ football yesterday.",
+a:["played","player","playful","quick"],
+x:0,
+e:"Played is a verb."
+},
+
+{
+c:"verb",
+q:"The baby sleeps peacefully. Which is the verb?",
+a:["baby","sleeps","peacefully","the"],
+x:1,
+e:"Sleeps shows an action."
+},
+
+{
+c:"verb",
+q:"Choose the verb: He writes a letter.",
+a:["he","writes","letter","a"],
+x:1,
+e:"Writes is an action."
+},
+
+{
+c:"verb",
+q:"Which word is NOT a verb?",
+a:["sing","dance","beautiful","swim"],
+x:2,
+e:"Beautiful is an adjective."
+},
+
+{
+c:"verb",
+q:"The students ___ English.",
+a:["study","student","studious","quickly"],
+x:0,
+e:"Study is an action."
+},
+
+{
+c:"verb",
+q:"Which word is a verb?",
+a:["eat","food","hungry","quickly"],
+x:0,
+e:"Eat is an action."
+},
+
+{
+c:"verb",
+q:"My mother ___ dinner every evening.",
+a:["cooks","kitchen","delicious","mother"],
+x:0,
+e:"Cooks is a verb."
+},
+
+
+{
+c:"adjective",
+q:"Which word is an adjective?",
+a:["beautiful","run","quickly","school"],
+x:0,
+e:"Beautiful describes something."
+},
+
+{
+c:"adjective",
+q:"She has a ___ dress.",
+a:["beautiful","beautifully","beauty","beautify"],
+x:0,
+e:"Beautiful describes the dress."
+},
+
+{
+c:"adjective",
+q:"Which word describes a person?",
+a:["happy","happily","run","they"],
+x:0,
+e:"Happy describes a person."
+},
+
+{
+c:"adjective",
+q:"The elephant is very ___.",
+a:["big","bigly","bigness","run"],
+x:0,
+e:"Big describes the elephant."
+},
+
+{
+c:"adjective",
+q:"Which is an adjective?",
+a:["slowly","careful","run","they"],
+x:1,
+e:"Careful describes something."
+},
+
+{
+c:"adjective",
+q:"We saw an ___ movie.",
+a:["exciting","excitedly","excitement","excite"],
+x:0,
+e:"Exciting describes the movie."
+},
+
+{
+c:"adjective",
+q:"The soup is too ___.",
+a:["hot","hotly","heat","heating"],
+x:0,
+e:"Hot describes the soup."
+},
+
+{
+c:"adjective",
+q:"Which is an adjective?",
+a:["slowly","slow","slowness","run"],
+x:1,
+e:"Slow describes a noun."
+},
+
+{
+c:"adjective",
+q:"The test was ___.",
+a:["difficulty","difficult","difficultly","run"],
+x:1,
+e:"Difficult describes the test."
+},
+
+{
+c:"adjective",
+q:"The flowers are ___.",
+a:["beautiful","beautifully","beauty","beautify"],
+x:0,
+e:"Beautiful describes the flowers."
+},
+
+
+{
+c:"adverb",
+q:"She sings ___.",
+a:["beautiful","beauty","beautifully","beautify"],
+x:2,
+e:"Beautifully describes how she sings."
+},
+
+{
+c:"adverb",
+q:"He ran ___.",
+a:["quick","quickly","quicker","quickness"],
+x:1,
+e:"Quickly tells how he ran."
+},
+
+{
+c:"adverb",
+q:"They arrived early. Which is the adverb?",
+a:["they","arrived","early","the"],
+x:2,
+e:"Early tells when."
+},
+
+{
+c:"adverb",
+q:"The baby slept ___.",
+a:["peaceful","peacefully","peace","peaceless"],
+x:1,
+e:"Peacefully describes how."
+},
+
+{
+c:"adverb",
+q:"She answered the question ___.",
+a:["correct","correctly","correction","correctness"],
+x:1,
+e:"Correctly tells how."
+},
+
+{
+c:"adverb",
+q:"Which word tells how he spoke?",
+a:["He","spoke","softly","voice"],
+x:2,
+e:"Softly tells how."
+},
+
+{
+c:"adverb",
+q:"We will meet ___.",
+a:["tomorrow","tomorrow's","morrow","tomorrows"],
+x:0,
+e:"Tomorrow tells when."
+},
+
+{
+c:"adverb",
+q:"The students worked ___.",
+a:["hard","hardness","hardly","harder"],
+x:0,
+e:"Hard tells how."
+},
+
+{
+c:"adverb",
+q:"Which is an adverb?",
+a:["happy","happily","happiness","happier"],
+x:1,
+e:"Happily modifies an action."
+},
+
+{
+c:"adverb",
+q:"The dog barked ___.",
+a:["loud","loudly","loudness","louder"],
+x:1,
+e:"Loudly tells how."
+},
+
+
+{
+c:"preposition",
+q:"The book is ___ the table.",
+a:["on","quickly","happy","they"],
+x:0,
+e:"On shows position."
+},
+
+{
+c:"preposition",
+q:"The cat is hiding ___ the bed.",
+a:["under","beautiful","runs","she"],
+x:0,
+e:"Under shows location."
+},
+
+{
+c:"preposition",
+q:"We arrived ___ school.",
+a:["at","happy","quickly","they"],
+x:0,
+e:"At shows a specific place."
+},
+
+{
+c:"preposition",
+q:"The ball is ___ the box.",
+a:["inside","beautifully","run","he"],
+x:0,
+e:"Inside shows location."
+},
+
+{
+c:"preposition",
+q:"She walked ___ the bridge.",
+a:["across","careful","quickly","they"],
+x:0,
+e:"Across shows movement."
+},
+
+{
+c:"preposition",
+q:"The picture is ___ the wall.",
+a:["on","softly","beautiful","run"],
+x:0,
+e:"On shows position."
+},
+
+{
+c:"preposition",
+q:"He sat ___ me.",
+a:["beside","happy","quick","they"],
+x:0,
+e:"Beside means next to."
+},
+
+{
+c:"preposition",
+q:"The school is ___ the hospital and bank.",
+a:["between","beautifully","run","she"],
+x:0,
+e:"Between is used for two places."
+},
+
+{
+c:"preposition",
+q:"They travelled ___ Sabah.",
+a:["around","happy","quickly","they"],
+x:0,
+e:"Around can show movement."
+},
+
+{
+c:"preposition",
+q:"The children ran ___ the classroom.",
+a:["into","beautiful","quickly","they"],
+x:0,
+e:"Into shows movement inside."
+}
+
 ];
+
+
+/* =========================
+   EXACTLY 50 BOXES
+========================= */
+
 const path=[
+
 "START",
-"noun","pronoun","verb","adjective","adverb","preposition",
-"noun","BONUS","pronoun","verb","adjective","adverb","preposition",
-"noun","pronoun","BONUS","verb","adjective","adverb","preposition",
-"noun","pronoun","verb","BONUS","adjective","adverb","preposition",
-"noun","pronoun","verb","adjective","BONUS","adverb","preposition",
-"noun","pronoun","verb","adjective","adverb","BONUS","preposition",
-"noun","pronoun","verb","adjective","adverb","preposition",
-"noun","FINISH"
+
+"noun",
+"pronoun",
+"verb",
+"adjective",
+"adverb",
+"preposition",
+
+"noun",
+"BONUS",
+"pronoun",
+"verb",
+"adjective",
+"adverb",
+"preposition",
+
+"noun",
+"pronoun",
+"BONUS",
+"verb",
+"adjective",
+"adverb",
+"preposition",
+
+"noun",
+"pronoun",
+"verb",
+"BONUS",
+"adjective",
+"adverb",
+"preposition",
+
+"noun",
+"pronoun",
+"verb",
+"adjective",
+"BONUS",
+"adverb",
+"preposition",
+
+"noun",
+"pronoun",
+"verb",
+"adjective",
+"adverb",
+"BONUS",
+"preposition",
+
+"noun",
+"pronoun",
+"verb",
+"adjective",
+
+"FINISH"
+
 ];
-const playerStyles=["m0","m1","m2","m3"], emojis=["🔵","🩷","🟢","🟣"];
-let players=[],current=0,locked=false,activeQuestion=null,moveTimer=null;
-function buildNameInputs(){const n=+document.getElementById('playerCount').value,box=document.getElementById('nameInputs');box.innerHTML='';for(let i=0;i<n;i++){const inp=document.createElement('input');inp.id='pname'+i;inp.placeholder='Player '+(i+1)+' name';inp.value='Player '+(i+1);box.appendChild(inp)}}
-function begin(){const n=+document.getElementById('playerCount').value;players=[];for(let i=0;i<n;i++){players.push({name:(document.getElementById('pname'+i).value.trim()||'Player '+(i+1)),pos:0,xp:0,correct:0,attempts:0,streak:0,stats:Object.fromEntries(categories.map(c=>[c.key,[0,0]])),finished:false})}current=0;document.getElementById('startOverlay').style.display='none';render();log('🚀 '+players[0].name+' starts!');document.getElementById('rollBtn').disabled=false;document.getElementById('diceResult').textContent=players[0].name+"\'s turn — roll the dice!";}
-function render(){const p=players[current];document.getElementById('turnName').textContent=p?p.name:'—';document.getElementById('turnXP').textContent=p?p.xp:0;document.getElementById('turnPos').textContent=p?p.pos+1:1;renderBoard();renderPlayers();mastery()}
-function renderBoard(){const b=document.getElementById('board');b.innerHTML='';path.forEach((k,i)=>{const c=document.createElement('div');c.className='cell';let label='',css='';if(k==='START'){css='start';label='🚀 START'}else if(k==='FINISH'){css='finish';label='🏆 FINISH'}else if(k==='BONUS'){css='special';label='⭐ BONUS'}else{css=k;const item=categories.find(x=>x.key===k);label=item?item.emoji+' '+item.name:'⭐ BONUS'}c.classList.add(css);c.innerHTML='<small>'+(i+1)+'</small>'+label;players.forEach((p,pi)=>{if(p.pos===i){const m=document.createElement('div');m.className='marker '+playerStyles[pi];m.textContent=emojis[pi];m.title=p.name;c.appendChild(m)}});if(players[current]&&players[current].pos===i)c.classList.add('current');b.appendChild(c)})}
-function renderPlayers(){const box=document.getElementById('players');box.innerHTML='';players.forEach((p,i)=>{const d=document.createElement('div');d.className='player-card '+(i===current?'active-card':'');const pct=p.attempts?Math.round(p.correct/p.attempts*100):0;d.innerHTML='<b>'+emojis[i]+' '+p.name+'</b><br>📍 Box '+(p.pos+1)+' · ⭐ '+p.xp+' XP · 🎯 '+pct+'%';box.appendChild(d)})}
-function mastery(){const p=players[current];if(!p)return;let out='';categories.forEach(c=>{const s=p.stats[c.key],pct=s[1]?Math.round(s[0]/s[1]*100):0;out+='<div style="margin:8px 0"><b>'+c.emoji+' '+c.name+'</b> — '+s[0]+'/'+s[1]+' ('+pct+'%)</div>'});document.getElementById('mastery').innerHTML=out}
-function rollDice(){if(locked||!players.length)return;locked=true;document.getElementById('rollBtn').disabled=true;const face=document.getElementById('diceFace'),result=document.getElementById('diceResult'),faces=['⚀','⚁','⚂','⚃','⚄','⚅'];face.classList.add('rolling');result.textContent='🎲 '+players[current].name+' is rolling…';let ticks=0;const spin=setInterval(()=>{face.textContent=faces[Math.floor(Math.random()*6)];if(++ticks>=12){clearInterval(spin);const n=Math.floor(Math.random()*6)+1;face.textContent=faces[n-1];face.classList.remove('rolling');result.textContent='🎯 '+players[current].name+' rolled '+n+'!';movePlayer(n)}},100)}
-function movePlayer(steps){let moved=0;const p=players[current];moveTimer=setInterval(()=>{if(moved>=steps||p.pos>=path.length-1){clearInterval(moveTimer);finishMove();return}p.pos++;moved++;render();},360)}
-function finishMove(){const p=players[current];if(p.pos===path.length-1){p.finished=true;render();log('🏆 '+p.name+' reached FINISH!');endIfWinner();return}const k=path[p.pos];if(k==='BONUS'){p.xp+=10;render();log('⭐ '+p.name+' landed on BONUS (+10 XP)');nextTurn();return}ask(k)}
-function ask(k){const p=players[current];activeQuestion=questions.filter(q=>q.c===k)[Math.floor(Math.random()*questions.filter(q=>q.c===k).length)];document.getElementById('questionBox').classList.remove('hidden');const cat=categories.find(c=>c.key===k);document.getElementById('cat').textContent=cat.emoji+' '+cat.name+' CHALLENGE — '+p.name;document.getElementById('q').textContent=activeQuestion.q;const a=document.getElementById('answers');a.innerHTML='';activeQuestion.a.forEach((v,i)=>{const btn=document.createElement('button');btn.textContent=String.fromCharCode(65+i)+'. '+v;btn.onclick=()=>answer(btn,i,activeQuestion,k);a.appendChild(btn)});document.getElementById('feedback').classList.add('hidden')}
-function answer(btn,i,item,k){if(!locked)return;const p=players[current];locked=false;p.attempts++;p.stats[k][1]++;const buttons=[...document.querySelectorAll('#answers button')];buttons.forEach(b=>b.disabled=true);const fb=document.getElementById('feedback');if(i===item.x){btn.classList.add('correct');p.correct++;p.stats[k][0]++;p.streak++;const gain=10+(p.streak>=3?5:0);p.xp+=gain;fb.innerHTML='✅ Correct! +'+gain+' XP<br><small>'+item.e+'</small>';fb.style.background='#dcfce7';log('✅ '+p.name+' — '+categories.find(c=>c.key===k).name+' correct (+'+gain+' XP)')}else{btn.classList.add('wrong');buttons[item.x].classList.add('correct');p.streak=0;fb.innerHTML='❌ Not quite. Correct answer: <b>'+item.a[item.x]+'</b><br><small>'+item.e+'</small>';fb.style.background='#fee2e2';log('❌ '+p.name+' — '+categories.find(c=>c.key===k).name+' incorrect')}fb.classList.remove('hidden');render();setTimeout(()=>{document.getElementById('questionBox').classList.add('hidden');if(p.pos===path.length-1){p.finished=true;endIfWinner()}else nextTurn()},1800)}
-function nextTurn(){current=(current+1)%players.length;while(players[current].finished)current=(current+1)%players.length;locked=false;render();document.getElementById('rollBtn').disabled=false;document.getElementById('diceResult').textContent=players[current].name+"\'s turn — roll the dice!";log("👉 "+players[current].name+"'s turn")}
-function endIfWinner(){const p=players[current];document.getElementById('rollBtn').disabled=true;setTimeout(()=>alert('🏆 '+p.name+' reached FINISH first!\n\n⭐ XP: '+p.xp+'\n🎯 Accuracy: '+(p.attempts?Math.round(p.correct/p.attempts*100):0)+'%\n\nG-QUEST WINNER!'),200);render()}
-function log(t){const d=document.createElement('div');d.className='logitem';d.textContent=t;document.getElementById('log').prepend(d)}
-buildNameInputs();render();
-</script></body></html>
+
+
+/* =========================
+   GAME VARIABLES
+========================= */
+
+const playerAvatars=[
+"🧙",
+"🧑‍🚀",
+"🦸",
+"🧚",
+"🥷",
+"🧑‍🔬"
+];
+
+const markerClasses=[
+"m0",
+"m1",
+"m2",
+"m3"
+];
+
+const diceFaces=[
+"⚀",
+"⚁",
+"⚂",
+"⚃",
+"⚄",
+"⚅"
+];
+
+let players=[];
+let current=0;
+let locked=false;
+let activeQuestion=null;
+let moveTimer=null;
+
+
+/* =========================
+   PLAYER SETUP
+========================= */
+
+function buildNameInputs(){
+
+const count=
+Number(
+document.getElementById("playerCount").value
+);
+
+const box=
+document.getElementById("nameInputs");
+
+box.innerHTML="";
+
+for(let i=0;i<count;i++){
+
+const wrap=
+document.createElement("div");
+
+wrap.innerHTML=`
+
+<input
+id="pname${i}"
+value="Player ${i+1}"
+placeholder="Player ${i+1} name">
+
+<div style="font-size:12px;font-weight:bold">
+Choose Avatar
+</div>
+
+<div
+class="avatar-select"
+id="avatars${i}">
+</div>
+
+`;
+
+box.appendChild(wrap);
+
+const avatarBox=
+wrap.querySelector(
+"#avatars"+i
+);
+
+playerAvatars
+.slice(0,6)
+.forEach((avatar,index)=>{
+
+const button=
+document.createElement("button");
+
+button.type="button";
+
+button.className=
+"avatar-option"+
+(index===i?" selected":"");
+
+button.textContent=avatar;
+
+button.onclick=()=>{
+
+avatarBox
+.querySelectorAll("button")
+.forEach(b=>
+b.classList.remove("selected")
+);
+
+button.classList.add("selected");
+
+};
+
+avatarBox.appendChild(button);
+
+});
+
+}
+
+}
+
+
+function getSelectedAvatar(index){
+
+const box=
+document.getElementById(
+"avatars"+index
+);
+
+const selected=
+box.querySelector(".selected");
+
+return selected?
+selected.textContent:
+playerAvatars[index];
+
+}
+
+
+function begin(){
+
+const count=
+Number(
+document.getElementById("playerCount").value
+);
+
+players=[];
+
+for(let i=0;i<count;i++){
+
+players.push({
+
+name:
+document
+.getElementById("pname"+i)
+.value
+.trim()
+||
+"Player "+(i+1),
+
+avatar:
+getSelectedAvatar(i),
+
+pos:0,
+
+xp:0,
+
+correct:0,
+
+attempts:0,
+
+streak:0,
+
+finished:false,
+
+badges:[],
+
+stats:
+Object.fromEntries(
+categories.map(c=>[
+c.key,
+[0,0]
+])
+)
+
+});
+
+}
+
+current=0;
+locked=false;
+
+document
+.getElementById("startOverlay")
+.style.display="none";
+
+document
+.getElementById("rollBtn")
+.disabled=false;
+
+render();
+
+log(
+"🚀 "+
+players[0].name+
+" starts the game!"
+);
+
+document
+.getElementById("diceResult")
+.textContent=
+players[0].name+
+"'s turn — Roll the dice!";
+
+}
+
+
+/* =========================
+   RENDER BOARD
+========================= */
+
+function render(){
+
+if(!players.length)return;
+
+const p=
+players[current];
+
+document
+.getElementById("turnName")
+.textContent=p.name;
+
+document
+.getElementById("turnXP")
+.textContent=p.xp;
+
+document
+.getElementById("turnPos")
+.textContent=p.pos+1;
+
+renderBoard();
+
+renderPlayers();
+
+renderMastery();
+
+renderBadges();
+
+}
+
+
+function renderBoard(){
+
+const board=
+document.getElementById("board");
+
+board.innerHTML="";
+
+path.forEach((type,index)=>{
+
+const cell=
+document.createElement("div");
+
+cell.className="cell";
+
+let label="";
+let css="";
+
+if(type==="START"){
+
+css="start";
+label="🚀 START";
+
+}
+
+else if(type==="FINISH"){
+
+css="finish";
+label="🏆 FINISH";
+
+}
+
+else if(type==="BONUS"){
+
+css="bonus";
+label="⭐ BONUS";
+
+}
+
+else{
+
+css=type;
+
+const cat=
+categories.find(
+c=>c.key===type
+);
+
+label=
+cat.emoji+
+" "+
+cat.name;
+
+}
+
+cell.classList.add(css);
+
+cell.innerHTML=
+`
+<small>${index+1}</small>
+${label}
+`;
+
+
+players.forEach(
+(player,playerIndex)=>{
+
+if(player.pos===index){
+
+const marker=
+document.createElement("div");
+
+marker.className=
+"marker "+
+markerClasses[playerIndex];
+
+marker.textContent=
+player.avatar;
+
+marker.title=
+player.name;
+
+cell.appendChild(marker);
+
+}
+
+});
+
+
+if(
+players[current] &&
+players[current].pos===index
+){
+
+cell.classList.add("current");
+
+}
+
+board.appendChild(cell);
+
+});
+
+}
+
+
+/* =========================
+   PLAYER PANEL
+========================= */
+
+function renderPlayers(){
+
+const box=
+document.getElementById("players");
+
+box.innerHTML="";
+
+players.forEach(
+(player,index)=>{
+
+const accuracy=
+player.attempts?
+Math.round(
+player.correct/
+player.attempts*
+100
+):
+0;
+
+const div=
+document.createElement("div");
+
+div.className=
+"player-card"+
+(index===current?
+" active-card":
+"")+
+(player.finished?
+" winner":
+"");
+
+div.innerHTML=`
+
+<b>
+${player.avatar}
+${player.name}
+</b>
+
+<br>
+
+📍 Box ${player.pos+1}
+· ⭐ ${player.xp} XP
+· 🎯 ${accuracy}%
+
+${player.finished?
+"<br>🏆 FINISHED":
+""}
+
+`;
+
+box.appendChild(div);
+
+});
+
+}
+
+
+/* =========================
+   MASTERY
+========================= */
+
+function renderMastery(){
+
+const player=
+players[current];
+
+if(!player)return;
+
+let html=
+'<div class="analytics">';
+
+categories.forEach(
+category=>{
+
+const stats=
+player.stats[
+category.key
+];
+
+const percentage=
+stats[1]?
+Math.round(
+stats[0]/
+stats[1]*
+100
+):
+0;
+
+html+=`
+
+<div class="barrow">
+
+<span>
+${category.emoji}
+${category.name}
+</span>
+
+<div class="bar">
+
+<i
+style="width:${percentage}%">
+</i>
+
+</div>
+
+<span>
+${percentage}%
+</span>
+
+</div>
+
+`;
+
+});
+
+html+="</div>";
+
+document
+.getElementById("mastery")
+.innerHTML=html;
+
+}
+
+
+/* =========================
+   BADGES
+========================= */
+
+function renderBadges(){
+
+const player=
+players[current];
+
+const box=
+document.getElementById("badges");
+
+if(!player)return;
+
+if(player.badges.length===0){
+
+box.innerHTML=
+'<div style="font-size:12px;color:#667085">🏅 Badges will appear as you progress.</div>';
+
+return;
+
+}
+
+box.innerHTML=
+player.badges
+.map(
+badge=>
+`<span class="badge">${badge}</span>`
+)
+.join("");
+
+}
+
+
+/* =========================
+   DICE
+========================= */
+
+function rollDice(){
+
+if(
+locked ||
+!players.length
+)return;
+
+locked=true;
+
+document
+.getElementById("rollBtn")
+.disabled=true;
+
+const face=
+document.getElementById("diceFace");
+
+const result=
+document.getElementById("diceResult");
+
+face.classList.add("rolling");
+
+result.textContent=
+"🎲 "+
+players[current].name+
+" is rolling...";
+
+playSound("roll");
+
+let count=0;
+
+const animation=
+setInterval(()=>{
+
+face.textContent=
+diceFaces[
+Math.floor(
+Math.random()*6
+)
+];
+
+count++;
+
+if(count>=14){
+
+clearInterval(animation);
+
+const number=
+Math.floor(
+Math.random()*6
+)+1;
+
+face.textContent=
+diceFaces[number-1];
+
+face.classList.remove("rolling");
+
+result.textContent=
+"🎯 "+
+players[current].name+
+" rolled "+
+number+"!";
+
+playSound("land");
+
+movePlayer(number);
+
+}
+
+},100);
+
+}
+
+
+/* =========================
+   MOVE PLAYER
+========================= */
+
+function movePlayer(steps){
+
+const player=
+players[current];
+
+let moved=0;
+
+moveTimer=
+setInterval(()=>{
+
+if(
+moved>=steps ||
+player.pos>=path.length-1
+){
+
+clearInterval(moveTimer);
+
+finishMove();
+
+return;
+
+}
+
+player.pos++;
+
+moved++;
+
+playSound("step");
+
+render();
+
+},350);
+
+}
+
+
+/* =========================
+   LANDING
+========================= */
+
+function finishMove(){
+
+const player=
+players[current];
+
+if(
+player.pos===
+path.length-1
+){
+
+player.finished=true;
+
+player.xp+=25;
+
+addBadge(
+player,
+"🏆 Champion"
+);
+
+playSound("win");
+
+render();
+
+log(
+"🏆 "+
+player.name+
+" reached FINISH! +25 XP"
+);
+
+setTimeout(
+endWinner,
+400
+);
+
+return;
+
+}
+
+const type=
+path[player.pos];
+
+
+if(type==="BONUS"){
+
+player.xp+=10;
+
+addBadge(
+player,
+"⭐ Bonus Hunter"
+);
+
+playSound("bonus");
+
+render();
+
+log(
+"⭐ "+
+player.name+
+" landed on BONUS! +10 XP"
+);
+
+nextTurn();
+
+return;
+
+}
+
+askQuestion(type);
+
+}
+
+
+/* =========================
+   QUESTION
+========================= */
+
+function askQuestion(categoryKey){
+
+const player=
+players[current];
+
+const pool=
+questions.filter(
+q=>q.c===categoryKey
+);
+
+activeQuestion=
+pool[
+Math.floor(
+Math.random()*pool.length
+)
+];
+
+const category=
+categories.find(
+c=>c.key===categoryKey
+);
+
+document
+.getElementById("questionBox")
+.classList.remove("hidden");
+
+document
+.getElementById("cat")
+.textContent=
+category.emoji+
+" "+
+category.name+
+" CHALLENGE — "+
+player.name;
+
+document
+.getElementById("q")
+.textContent=
+activeQuestion.q;
+
+const answerBox=
+document.getElementById("answers");
+
+answerBox.innerHTML="";
+
+activeQuestion.a.forEach(
+(answer,index)=>{
+
+const button=
+document.createElement("button");
+
+button.textContent=
+String.fromCharCode(65+index)+
+". "+
+answer;
+
+button.onclick=()=>{
+
+answerQuestion(
+button,
+index,
+categoryKey
+);
+
+};
+
+answerBox.appendChild(button);
+
+});
+
+document
+.getElementById("feedback")
+.classList.add("hidden");
+
+}
+
+
+/* =========================
+   ANSWER
+========================= */
+
+function answerQuestion(
+button,
+selected,
+categoryKey
+){
+
+if(!locked)return;
+
+locked=false;
+
+const player=
+players[current];
+
+const question=
+activeQuestion;
+
+player.attempts++;
+
+player.stats[
+categoryKey
+][1]++;
+
+const buttons=
+[
+...document.querySelectorAll(
+"#answers button"
+)
+];
+
+buttons.forEach(
+b=>b.disabled=true
+);
+
+const feedback=
+document.getElementById(
+"feedback"
+);
+
+
+if(selected===question.x){
+
+button.classList.add("correct");
+
+player.correct++;
+
+player.stats[
+categoryKey
+][0]++;
+
+player.streak++;
+
+let gain=10;
+
+if(player.streak>=3){
+
+gain+=5;
+
+addBadge(
+player,
+"🔥 3-Streak"
+);
+
+}
+
+if(player.correct===1){
+
+addBadge(
+player,
+"🎯 First Win"
+);
+
+}
+
+if(player.correct>=10){
+
+addBadge(
+player,
+"🧠 Grammar Master"
+);
+
+}
+
+player.xp+=gain;
+
+playSound("correct");
+
+feedback.style.background=
+"#dcfce7";
+
+feedback.innerHTML=
+`
+✅ <b>Correct!</b>
++${gain} XP
+
+<br>
+
+<small>
+${question.e}
+</small>
+`;
+
+log(
+"✅ "+
+player.name+
+" — correct! +"+
+gain+
+" XP"
+);
+
+}
+
+else{
+
+button.classList.add("wrong");
+
+buttons[
+question.x
+].classList.add("correct");
+
+player.streak=0;
+
+playSound("wrong");
+
+feedback.style.background=
+"#fee2e2";
+
+feedback.innerHTML=
+`
+❌ <b>Not quite.</b>
+
+<br>
+
+Correct answer:
+<b>
+${question.a[question.x]}
+</b>
+
+<br>
+
+<small>
+${question.e}
+</small>
+`;
+
+log(
+"❌ "+
+player.name+
+" — incorrect"
+);
+
+}
+
+feedback
+.classList
+.remove("hidden");
+
+render();
+
+setTimeout(()=>{
+
+document
+.getElementById("questionBox")
+.classList.add("hidden");
+
+if(
+player.pos===
+path.length-1
+){
+
+player.finished=true;
+
+endWinner();
+
+}
+
+else{
+
+nextTurn();
+
+}
+
+},1800);
+
+}
+
+
+/* =========================
+   BADGE HELPER
+========================= */
+
+function addBadge(
+player,
+badge
+){
+
+if(
+!player.badges.includes(badge)
+){
+
+player.badges.push(badge);
+
+}
+
+}
+
+
+/* =========================
+   NEXT TURN
+========================= */
+
+function nextTurn(){
+
+if(
+players.every(
+p=>p.finished
+)
+){
+
+return;
+
+}
+
+do{
+
+current=
+(current+1)%
+players.length;
+
+}
+while(
+players[current].finished
+);
+
+locked=false;
+
+render();
+
+document
+.getElementById("rollBtn")
+.disabled=false;
+
+document
+.getElementById("diceResult")
+.textContent=
+players[current].name+
+"'s turn — Roll the dice!";
+
+log(
+"👉 "+
+players[current].name+
+"'s turn"
+);
+
+}
+
+
+/* =========================
+   WINNER
+========================= */
+
+function endWinner(){
+
+const winner=
+players[current];
+
+document
+.getElementById("rollBtn")
+.disabled=true;
+
+render();
+
+setTimeout(()=>{
+
+alert(
+`
+🏆 G-QUEST WINNER!
+
+${winner.avatar}
+${winner.name}
+
+⭐ XP: ${winner.xp}
+
+🎯 Accuracy:
+${
+winner.attempts?
+Math.round(
+winner.correct/
+winner.attempts*
+100
+):
+0
+}%
+
+🏅 Badges:
+${
+winner.badges.length?
+winner.badges.join(", "):
+"None"
+}
+
+Congratulations!
+`
+);
+
+},300);
+
+}
+
+
+/* =========================
+   TEACHER DASHBOARD
+========================= */
+
+function showDashboard(){
+
+let html="";
+
+players.forEach(
+player=>{
+
+const accuracy=
+player.attempts?
+Math.round(
+player.correct/
+player.attempts*
+100
+):
+0;
+
+html+=`
+
+<div class="player-card">
+
+<h3>
+${player.avatar}
+${player.name}
+</h3>
+
+<div class="summary">
+
+<div>
+<b>${player.xp}</b>
+XP
+</div>
+
+<div>
+<b>${accuracy}%</b>
+Accuracy
+</div>
+
+<div>
+<b>${player.pos+1}</b>
+Position
+</div>
+
+</div>
+
+<div class="analytics">
+
+`;
+
+categories.forEach(
+category=>{
+
+const stats=
+player.stats[
+category.key
+];
+
+const percentage=
+stats[1]?
+Math.round(
+stats[0]/
+stats[1]*
+100
+):
+0;
+
+html+=`
+
+<div class="barrow">
+
+<span>
+${category.emoji}
+${category.name}
+</span>
+
+<div class="bar">
+
+<i
+style="width:${percentage}%">
+</i>
+
+</div>
+
+<span>
+${percentage}%
+</span>
+
+</div>
+
+`;
+
+});
+
+html+=`
+
+</div>
+
+<p style="font-size:12px">
+🏅 ${
+player.badges.length?
+player.badges.join(" "):
+"No badges yet"
+}
+</p>
+
+</div>
+
+`;
+
+});
+
+
+const overlay=
+document.createElement("div");
+
+overlay.className="overlay";
+
+overlay.innerHTML=`
+
+<div class="modal">
+
+<h2>
+📈 TEACHER DASHBOARD
+</h2>
+
+<p>
+Live performance analysis for this game session.
+</p>
+
+${html}
+
+<button
+onclick="this.closest('.overlay').remove()"
+>
+✕ CLOSE
+</button>
+
+</div>
+
+`;
+
+document.body.appendChild(
+overlay
+);
+
+}
+
+
+/* =========================
+   GAME LOG
+========================= */
+
+function log(message){
+
+const logBox=
+document.getElementById("log");
+
+const item=
+document.createElement("div");
+
+item.className="logitem";
+
+item.textContent=message;
+
+logBox.prepend(item);
+
+}
+
+
+/* =========================
+   SOUND EFFECTS
+========================= */
+
+function playSound(type){
+
+try{
+
+const AudioContext=
+window.AudioContext||
+window.webkitAudioContext;
+
+if(!AudioContext)return;
+
+const context=
+new AudioContext();
+
+const oscillator=
+context.createOscillator();
+
+const gain=
+context.createGain();
+
+const frequencies={
+
+roll:180,
+
+step:420,
+
+land:650,
+
+correct:880,
+
+wrong:180,
+
+bonus:1040,
+
+win:1200
+
+};
+
+oscillator.frequency.value=
+frequencies[type]||500;
+
+oscillator.type=
+type==="wrong"?
+"sawtooth":
+"sine";
+
+gain.gain.setValueAtTime(
+0.0001,
+context.currentTime
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.08,
+context.currentTime+0.01
+);
+
+gain.gain.exponentialRampToValueAtTime(
+0.0001,
+context.currentTime+0.18
+);
+
+oscillator.connect(gain);
+
+gain.connect(
+context.destination
+);
+
+oscillator.start();
+
+oscillator.stop(
+context.currentTime+0.2
+);
+
+}
+
+catch(error){
+
+console.log(
+"Sound unavailable"
+);
+
+}
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+buildNameInputs();
+
+</script>
+
+</body>
+</html>
