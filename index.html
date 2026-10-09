@@ -12,8 +12,9 @@ body{
 margin:0;
 font-family:Arial,sans-serif;
 background:
-radial-gradient(circle at 10% 10%,#fff 0 12%,transparent 30%),
-linear-gradient(135deg,#eef2ff,#fff1f8,#ecfeff);
+radial-gradient(circle at 12% 8%,#ffffff 0 8%,transparent 28%),
+radial-gradient(circle at 88% 18%,#c4b5fd 0 4%,transparent 18%),
+linear-gradient(135deg,#0f172a,#1e1b4b 45%,#312e81 72%,#0f766e);
 color:#182033;
 min-height:100vh
 }
@@ -25,11 +26,11 @@ padding:18px
 }
 
 header,.card{
-background:rgba(255,255,255,.96);
+background:rgba(255,255,255,.97);
 border-radius:26px;
 padding:20px;
-box-shadow:0 14px 40px #33415520;
-border:1px solid #fff
+box-shadow:0 20px 55px #02061766;
+border:1px solid #ffffffaa
 }
 
 header{
@@ -41,7 +42,11 @@ gap:15px
 
 h1{
 margin:0;
-font-size:30px
+font-size:32px;
+background:linear-gradient(90deg,#4f46e5,#7c3aed,#0891b2);
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent
 }
 
 .sub{
@@ -102,37 +107,68 @@ font-weight:bold
 
 .route{
 font-size:12px;
-font-weight:bold;
-color:#667085;
-margin:7px 0
+font-weight:900;
+color:#4338ca;
+margin:7px 0 10px;
+background:#eef2ff;
+padding:10px 13px;
+border-radius:14px;
+border:1px solid #c7d2fe
 }
 
 #board{
 display:grid;
 grid-template-columns:repeat(10,1fr);
-gap:8px;
-padding:12px;
-background:linear-gradient(145deg,#f8fafc,#eef2ff);
-border:2px solid #e2e8f0;
-border-radius:22px
+gap:9px;
+padding:16px;
+position:relative;
+overflow:hidden;
+background:
+radial-gradient(circle at 20% 15%,#818cf833 0 5%,transparent 18%),
+radial-gradient(circle at 80% 80%,#22d3ee22 0 6%,transparent 20%),
+linear-gradient(145deg,#111827,#1e1b4b 52%,#0f172a);
+border:3px solid #a5b4fc99;
+border-radius:28px;
+box-shadow:inset 0 0 40px #02061799,0 15px 35px #02061755
 }
 
 .cell{
 min-height:82px;
-border-radius:17px;
-border:3px solid white;
+border-radius:20px;
+border:3px solid #ffffffcc;
 display:flex;
 justify-content:center;
 align-items:center;
 text-align:center;
 font-weight:900;
 position:relative;
-box-shadow:0 5px 12px #47556920;
-transition:.2s
+box-shadow:0 8px 16px #02061766,inset 0 1px 0 #ffffffaa;
+transition:.22s;
+overflow:hidden;
+font-size:12px;
+letter-spacing:.2px
 }
 
 .cell:hover{
-transform:translateY(-3px)
+transform:translateY(-5px) scale(1.025);
+box-shadow:0 12px 24px #02061788,inset 0 1px 0 #ffffffaa
+}
+
+.cell::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(135deg,#ffffff55,transparent 45%,#00000012);
+pointer-events:none
+}
+
+.cell small{
+z-index:2;
+font-weight:900
+}
+
+.cell{
+text-shadow:0 1px 1px #ffffff55
 }
 
 .cell small{
@@ -146,47 +182,90 @@ font-size:10px
 }
 
 .start{
-background:linear-gradient(135deg,#a7f3d0,#34d399)
+background:linear-gradient(135deg,#34d399,#059669);
+color:#052e16;
+box-shadow:0 0 22px #34d39966
 }
 
 .finish{
-background:linear-gradient(135deg,#fde68a,#f59e0b);
-animation:finish 1.5s infinite alternate
+background:
+radial-gradient(circle at 50% 25%,#fff7ad 0 7%,transparent 8%),
+linear-gradient(145deg,#fff7cc 0%,#facc15 24%,#f59e0b 58%,#b45309 100%);
+color:#451a03;
+border:3px solid #fff1a8;
+box-shadow:
+0 0 0 3px #fbbf24,
+0 0 0 7px #f59e0b55,
+0 0 26px #fbbf24cc,
+inset 0 3px 5px #ffffffbb,
+inset 0 -7px 10px #92400e55;
+animation:finishGrand 1.35s infinite alternate;
+text-shadow:0 1px 0 #fff7cc,0 2px 2px #92400e55
+}
+
+.finish::before{
+content:"✦";
+position:absolute;
+top:8px;
+right:10px;
+font-size:17px;
+color:#fffbea;
+text-shadow:0 0 8px #ffffff;
+z-index:2
+}
+
+.finish::after{
+content:"";
+position:absolute;
+inset:5px;
+border:2px solid #fff7cc;
+border-radius:14px;
+box-shadow:inset 0 0 12px #fff7cc99,0 0 10px #fff7cc77;
+pointer-events:none
 }
 
 .noun{
-background:linear-gradient(135deg,#dbeafe,#93c5fd)
+background:linear-gradient(135deg,#bfdbfe,#60a5fa);
+color:#172554
 }
 
 .pronoun{
-background:linear-gradient(135deg,#dcfce7,#86efac)
+background:linear-gradient(135deg,#bbf7d0,#4ade80);
+color:#052e16
 }
 
 .verb{
-background:linear-gradient(135deg,#fef3c7,#fcd34d)
+background:linear-gradient(135deg,#fde68a,#facc15);
+color:#422006
 }
 
 .adjective{
-background:linear-gradient(135deg,#ffedd5,#fdba74)
+background:linear-gradient(135deg,#fed7aa,#fb923c);
+color:#431407
 }
 
 .adverb{
-background:linear-gradient(135deg,#f3e8ff,#d8b4fe)
+background:linear-gradient(135deg,#e9d5ff,#c084fc);
+color:#3b0764
 }
 
 .preposition{
-background:linear-gradient(135deg,#ffe4e6,#fda4af)
+background:linear-gradient(135deg,#fecdd3,#fb7185);
+color:#4c0519
 }
 
 .bonus{
-background:linear-gradient(135deg,#e0e7ff,#a5b4fc);
+background:linear-gradient(135deg,#c7d2fe,#818cf8);
+color:#1e1b4b;
 animation:bonus 1.4s infinite alternate
 }
 
 .current{
-outline:4px solid #111827;
-transform:scale(1.04);
-z-index:3
+outline:4px solid #fef08a;
+outline-offset:2px;
+transform:scale(1.055);
+z-index:8;
+box-shadow:0 0 0 6px #fef08a33,0 0 28px #fef08a99
 }
 
 @keyframes bonus{
@@ -198,6 +277,17 @@ box-shadow:0 0 20px #6366f166
 @keyframes finish{
 to{
 box-shadow:0 0 25px #f59e0b77
+}
+}
+
+@keyframes finishGrand{
+0%{
+filter:saturate(1);
+box-shadow:0 0 0 3px #fbbf24,0 0 0 7px #f59e0b44,0 0 20px #fbbf2499,inset 0 3px 5px #ffffffbb,inset 0 -7px 10px #92400e55
+}
+100%{
+filter:saturate(1.25) brightness(1.07);
+box-shadow:0 0 0 4px #fef08a,0 0 0 9px #f59e0b66,0 0 38px #fbbf24ee,inset 0 3px 8px #ffffffdd,inset 0 -7px 10px #92400e55
 }
 }
 
@@ -232,17 +322,102 @@ animation:pop .35s ease-out
 .dice-stage{
 display:flex;
 align-items:center;
-gap:15px;
-padding:13px;
+gap:18px;
+padding:16px;
 margin-top:15px;
-background:#f8fafc;
-border-radius:18px
+background:linear-gradient(135deg,#eef2ff,#f8fafc);
+border-radius:22px;
+border:1px solid #c7d2fe;
+box-shadow:inset 0 1px 0 #ffffff,0 8px 18px #312e8118;
+perspective:800px
 }
 
 .dice-face{
-font-size:65px;
-width:80px;
-text-align:center
+font-size:0;
+width:84px;
+height:84px;
+flex:0 0 84px;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+position:relative;
+border-radius:18px;
+border:1px solid #cbd5e1;
+background:linear-gradient(145deg,#ffffff 0%,#f8fafc 38%,#dbe4f0 100%);
+box-shadow:
+inset 4px 4px 8px #ffffff,
+inset -6px -7px 10px #94a3b855,
+0 7px 0 #64748b,
+0 13px 20px #0f172a44;
+transform:rotateX(15deg) rotateY(-18deg);
+transition:transform .18s,box-shadow .18s;
+will-change:transform
+}
+
+.dice-face::before{
+content:"";
+position:absolute;
+inset:0;
+border-radius:inherit;
+background:linear-gradient(135deg,#ffffffdd 0%,transparent 42%,#64748b18 100%);
+pointer-events:none
+}
+
+.dice-face::after{
+content:"";
+position:absolute;
+inset:5px;
+border:1px solid #ffffffcc;
+border-radius:13px;
+pointer-events:none
+}
+
+.dice-face .pip{
+width:13px;
+height:13px;
+border-radius:50%;
+background:radial-gradient(circle at 32% 28%,#334155 0%,#0f172a 70%);
+box-shadow:inset 1px 1px 2px #ffffff66,0 1px 2px #02061766;
+position:absolute;
+z-index:2
+}
+
+.dice-face .pip.tl{top:15px;left:15px}
+.dice-face .pip.tc{top:15px;left:calc(50% - 6.5px)}
+.dice-face .pip.tr{top:15px;right:15px}
+.dice-face .pip.ml{top:calc(50% - 6.5px);left:15px}
+.dice-face .pip.mc{top:calc(50% - 6.5px);left:calc(50% - 6.5px)}
+.dice-face .pip.mr{top:calc(50% - 6.5px);right:15px}
+.dice-face .pip.bl{bottom:15px;left:15px}
+.dice-face .pip.bc{bottom:15px;left:calc(50% - 6.5px)}
+.dice-face .pip.br{bottom:15px;right:15px}
+
+
+.dice-result-wrap{display:flex;flex-direction:column;gap:8px;min-width:0;flex:1}
+.dice-number-result{
+display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+background:linear-gradient(135deg,#111827,#312e81);
+color:white;padding:9px 12px;border-radius:14px;
+box-shadow:0 5px 12px #312e8140;border:1px solid #818cf8
+}
+.result-label{font-size:9px;font-weight:900;letter-spacing:1px;color:#c7d2fe}
+.dice-number-result strong{
+display:inline-flex;align-items:center;justify-content:center;
+width:34px;height:34px;border-radius:10px;background:linear-gradient(145deg,#fef08a,#f59e0b);
+color:#451a03;font-size:22px;box-shadow:0 3px 0 #b45309
+}
+.result-pips{font-size:12px;font-weight:bold;color:#e0e7ff}
+.dice-face.rolling{
+animation:roll3d .12s infinite
+}
+
+@keyframes roll3d{
+0%{transform:rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateY(0) scale(1)}
+20%{transform:rotateX(160deg) rotateY(110deg) rotateZ(75deg) translateY(-9px) scale(1.05)}
+45%{transform:rotateX(300deg) rotateY(250deg) rotateZ(190deg) translateY(-15px) scale(1.1)}
+70%{transform:rotateX(500deg) rotateY(390deg) rotateZ(300deg) translateY(-7px) scale(1.06)}
+100%{transform:rotateX(720deg) rotateY(540deg) rotateZ(360deg) translateY(0) scale(1)}
 }
 
 .rolling{
@@ -488,7 +663,12 @@ padding:7px
 
 .cell{
 min-height:68px;
-font-size:10px
+font-size:10px;
+border-radius:15px
+}
+.finish{
+font-size:9px;
+letter-spacing:-.25px
 }
 
 .marker{
@@ -502,8 +682,22 @@ bottom:31px
 }
 
 .dice-face{
-font-size:52px
+width:66px;
+height:66px;
+flex-basis:66px
 }
+.dice-face .pip{width:10px;height:10px}
+.dice-face .pip.tl{top:12px;left:12px}
+.dice-face .pip.tc{top:12px;left:calc(50% - 5px)}
+.dice-face .pip.tr{top:12px;right:12px}
+.dice-face .pip.ml{top:calc(50% - 5px);left:12px}
+.dice-face .pip.mc{top:calc(50% - 5px);left:calc(50% - 5px)}
+.dice-face .pip.mr{top:calc(50% - 5px);right:12px}
+.dice-face .pip.bl{bottom:12px;left:12px}
+.dice-face .pip.bc{bottom:12px;left:calc(50% - 5px)}
+.dice-face .pip.br{bottom:12px;right:12px}
+.dice-number-result{gap:6px;padding:8px}
+.dice-number-result strong{width:30px;height:30px;font-size:19px}
 
 header{
 flex-direction:column;
@@ -551,7 +745,7 @@ align-items:flex-start
 
 <div class="board-head">
 
-<h2>🗺️ ADVENTURE BOARD</h2>
+<h2>🗺️ G-QUEST ADVENTURE MAP</h2>
 
 <div class="legend">
 
@@ -568,7 +762,7 @@ align-items:flex-start
 </div>
 
 <div class="route">
-🚀 START → 🧠 Grammar Challenge → ⭐ BONUS → 🏆 FINISH
+🚀 START → 🧠 GRAMMAR CHALLENGES → ⭐ TREASURE BONUS → 🏆 FINISH
 </div>
 
 <div id="board"></div>
@@ -576,12 +770,17 @@ align-items:flex-start
 
 <div class="dice-stage">
 
-<div id="diceFace" class="dice-face">
-⚀
+<div id="diceFace" class="dice-face" aria-label="Dice showing one">
+<span class="pip mc"></span>
 </div>
 
-<div id="diceResult" class="dice-result">
-Waiting for players...
+<div class="dice-result-wrap">
+  <div id="diceResult" class="dice-result">Waiting for players...</div>
+  <div id="diceNumberResult" class="dice-number-result" aria-live="polite">
+    <span class="result-label">LAST ROLL</span>
+    <strong id="diceNumber">—</strong>
+    <span class="result-pips" id="resultPips">Roll to start</span>
+  </div>
 </div>
 
 </div>
@@ -1284,6 +1483,9 @@ const path=[
 "pronoun",
 "verb",
 "adjective",
+"adverb",
+"BONUS",
+"preposition",
 
 "FINISH"
 
@@ -1311,19 +1513,96 @@ const markerClasses=[
 ];
 
 const diceFaces=[
-"⚀",
-"⚁",
-"⚂",
-"⚃",
-"⚄",
-"⚅"
+[["mc"]],
+[["tl","br"]],
+[["tl","mc","br"]],
+[["tl","tr","bl","br"]],
+[["tl","tr","mc","bl","br"]],
+[["tl","tr","ml","mr","bl","br"]]
 ];
+
+function renderDiceFace(number){
+  const face=document.getElementById("diceFace");
+  if(!face)return;
+  const pips=diceFaces[number-1]||diceFaces[0];
+  face.innerHTML=pips.map(pos=>`<span class="pip ${pos[0]}"></span>`).join("");
+  face.setAttribute("aria-label",`Dice showing ${number}`);
+}
+
+function showDiceResult(number, rolling=false){
+  const numberBox=document.getElementById("diceNumber");
+  const pipsBox=document.getElementById("resultPips");
+  if(numberBox) numberBox.textContent=rolling ? "…" : String(number);
+  if(pipsBox) pipsBox.textContent=rolling ? "Rolling…" : `${number} ${number===1 ? "dot" : "dots"} rolled`;
+}
 
 let players=[];
 let current=0;
 let locked=false;
 let activeQuestion=null;
 let moveTimer=null;
+
+// GOOGLE SHEETS LEADERBOARD
+// Replace this placeholder with your deployed Google Apps Script Web App URL.
+const GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/a/macros/moe-dl.edu.my/s/AKfycbw_nTgQ4D-MMrFYc7mMFcQi9JXhspAKaJtIsiB9l4Nsn6hjowP2HvBfW6zPzDBD4sOZiA/exec";
+let leaderboardSaveStarted = false;
+
+async function saveLeaderboardToGoogleSheets(){
+  if(leaderboardSaveStarted) return;
+  leaderboardSaveStarted = true;
+
+  if(!GOOGLE_SHEETS_WEB_APP_URL ||
+     GOOGLE_SHEETS_WEB_APP_URL.includes("PASTE_YOUR_WEB_APP_URL_HERE")){
+    log("⚠️ Google Sheets belum disambungkan. Masukkan URL Apps Script dahulu.");
+    return;
+  }
+
+  const gameId = "GQUEST-" + Date.now();
+  const rows = players.map(player => {
+    const accuracy = player.attempts
+      ? Math.round((player.correct / player.attempts) * 100)
+      : 0;
+    const mastery = {};
+    categories.forEach(category => {
+      const result = player.stats && player.stats[category.key]
+        ? player.stats[category.key]
+        : [0, 0];
+      mastery[category.key] = {
+        correct: Number(result[0] || 0),
+        attempts: Number(result[1] || 0)
+      };
+    });
+
+    return {
+      gameId,
+      playerName: String(player.name || "").trim(),
+      avatar: String(player.avatar || ""),
+      xp: Number(player.xp || 0),
+      correct: Number(player.correct || 0),
+      attempts: Number(player.attempts || 0),
+      accuracy,
+      finalPosition: Number(player.pos || 0) + 1,
+      finished: Boolean(player.finished),
+      badges: Array.isArray(player.badges) ? player.badges.join(", ") : "",
+      mastery
+    };
+  });
+
+  try{
+    // text/plain + no-cors avoids a browser CORS preflight for Apps Script.
+    await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {"Content-Type": "text/plain;charset=UTF-8"},
+      body: JSON.stringify({source: "G-QUEST", rows})
+    });
+    log("📤 Keputusan dihantar ke Google Sheets. Semak helaian Leaderboard.");
+  }catch(error){
+    leaderboardSaveStarted = false;
+    log("❌ Gagal menghantar keputusan. Semak URL Apps Script dan sambungan internet.");
+    console.error("Google Sheets leaderboard error:", error);
+  }
+}
 
 
 /* =========================
@@ -1564,7 +1843,7 @@ label="🚀 START";
 else if(type==="FINISH"){
 
 css="finish";
-label="🏆 FINISH";
+label="👑 GRAND FINISH";
 
 }
 
@@ -1827,6 +2106,7 @@ const result=
 document.getElementById("diceResult");
 
 face.classList.add("rolling");
+showDiceResult(0, true);
 
 result.textContent=
 "🎲 "+
@@ -1858,8 +2138,8 @@ Math.floor(
 Math.random()*6
 )+1;
 
-face.textContent=
-diceFaces[number-1];
+renderDiceFace(number);
+showDiceResult(number);
 
 face.classList.remove("rolling");
 
@@ -2342,6 +2622,8 @@ players[current].name+
 ========================= */
 
 function endWinner(){
+
+saveLeaderboardToGoogleSheets();
 
 const winner=
 players[current];
